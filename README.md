@@ -1,3 +1,13 @@
+this is the result of having 30+ PCs that need new software installed on them. 
+
+installer files can be added or removed from the "game software" folder as well as "System software" and they will be installed. this allows customiszation as to what softwares can be installed. 
+
+as we use "Phoenix installer" as a monitoring software, ew need that installed as well but that needs to be installed last. 
+
+additionally, it will set the wallpaper from the "Media" folder from the file "Maverick Wallpaper.png"
+
+
+
 ## ⚙️ Script Workflow
 1. **Banner & Title**
    - Sets console title and prints header.
