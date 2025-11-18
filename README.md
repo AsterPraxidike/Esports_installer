@@ -5,9 +5,6 @@
 2. **Working Directory**
    - Switches to the script’s folder (`%~dp0`) so all paths are relative.
 
-3. **Logging**
-   - Creates/clears `install_log.txt` with timestamps.
-
 4. **Installers**
    - Runs all `.exe` and `.msi` files inside `System Software` and `Game Software`.
    - Each installer is launched sequentially, with start and finish times logged.
