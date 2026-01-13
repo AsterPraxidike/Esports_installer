@@ -10,17 +10,8 @@ setlocal enabledelayedexpansion
 :: Install from subfolders first
 call :installFolder "System Software"
 call :installFolder "Game Software"
+call :setWallpaper
 
-:: Set wallpaper
-set "WALLPAPER=%~dp0Media\Maverick Wallpaper.png"
-
-if exist "%WALLPAPER%" (
-    reg add "HKCU\Control Panel\Desktop" /v Wallpaper /t REG_SZ /d "%WALLPAPER%" /f >nul
-    RUNDLL32.EXE user32.dll,UpdatePerUserSystemParameters 1, True
-    echo Wallpaper applied successfully
-) else (
-    echo Wallpaper not found at "%WALLPAPER%"
-)
 
 :: Install Phoenix last
 ::if exist "%~dp0Phoenix Installer.exe" (
@@ -57,5 +48,34 @@ for %%I in (*.exe *.msi) do (
     echo Finished %%~nxI
     echo.
 )
+popd
+exit /b
+
+:setWallpaper
+set "SRC_WALLPAPER=%~dp0Media\Maverick Wallpaper.png"
+
+:: Prefer Documents, fallback to C:\EsportsInstaller
+set "DEST_DIR=%USERPROFILE%\Documents\Esports Installer\Media"
+if not exist "%USERPROFILE%\Documents" (
+    set "DEST_DIR=C:\EsportsInstaller\Media"
+)
+
+set "DEST_WALLPAPER=%DEST_DIR%\Maverick Wallpaper.png"
+
+if not exist "%SRC_WALLPAPER%" (
+    echo Wallpaper not found at "%SRC_WALLPAPER%"
+    exit /b
+)
+
+mkdir "%DEST_DIR%" 2>nul
+copy /y "%SRC_WALLPAPER%" "%DEST_WALLPAPER%" >nul
+
+reg add "HKCU\Control Panel\Desktop" /v Wallpaper /t REG_SZ /d "%DEST_WALLPAPER%" /f >nul
+RUNDLL32.EXE user32.dll,UpdatePerUserSystemParameters 1, True
+
+echo Wallpaper copied locally and applied.
+
+
+
 popd
 exit /b
