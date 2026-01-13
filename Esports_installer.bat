@@ -75,7 +75,4 @@ RUNDLL32.EXE user32.dll,UpdatePerUserSystemParameters 1, True
 
 echo Wallpaper copied locally and applied.
 
-
-
-popd
 exit /b
